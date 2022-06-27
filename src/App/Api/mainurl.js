@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const customerApi = axios.create({
-    baseURL: 'https://proxy.codebuilderpro.com/api',
+    baseURL: 'http://api.test/api',
 });
 
 /*

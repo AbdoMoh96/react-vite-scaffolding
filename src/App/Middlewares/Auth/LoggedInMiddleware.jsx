@@ -2,17 +2,17 @@ import {Navigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../../Redux/User/Slices/userSlice";
 import userSelector from "../../Redux/User/Selectors/userSelector";
-import getUserFromCookie from "../../Helpers/getUserFromCookie";
+import {getUserFromLocalStorage} from "../../Helpers/helper";
 
 
 const LoggedInMiddleware = ({children}) => {
     const dispatch = useDispatch();
     const userState = userSelector();
-    const userCookie = getUserFromCookie;
+    const userLocal = getUserFromLocalStorage;
 
 
-    if (userCookie !== null && userState.isLoggedIn !== true) {
-        dispatch(updateUser(userCookie));
+    if (userLocal !== null && userState.isLoggedIn !== true) {
+        dispatch(updateUser(userLocal));
         return children;
     } else if (userState.isLoggedIn === true) {
         return children;

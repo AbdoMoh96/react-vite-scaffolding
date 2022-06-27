@@ -1,11 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from "../../../Api/customersApi/example";
-import Cookie from "js-cookie";
+import axios from "../../../Api/mainurl";
 
 
 export const userLogin = createAsyncThunk('user/userLogin', async (data) => {
     const res = await axios.post('/tokens/create', data);
-    Cookie.set('user', JSON.stringify(res.data.user), {secure: true});
+    localStorage.setItem('user', JSON.stringify(res.data.user));
     return res.data.user;
 });
 
