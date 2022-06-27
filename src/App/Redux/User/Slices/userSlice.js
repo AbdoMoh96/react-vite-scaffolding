@@ -15,7 +15,8 @@ const initialState = {
     email: '',
     token: '',
     isLoggedIn: false,
-    isLoggingIn: false
+    isLoggingIn: false,
+    serverError: false,
 };
 
 const userSlice = createSlice({
@@ -45,6 +46,8 @@ const userSlice = createSlice({
         },
         [userLogin.rejected]: (state) => {
             state.isLoggedIn = false;
+            state.isLoggingIn = false;
+            state.serverError = true;
         },
     }
 });

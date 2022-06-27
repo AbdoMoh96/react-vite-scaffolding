@@ -1,12 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
+import {Routes, BrowserRouter} from "react-router-dom";
 import MainRoutes from "./Main/web";
 import ProtectedRoutes from "./Auth/ProtectedRoutes";
 
+
 const Router = () => {
-    return(
+    return (
         <BrowserRouter>
-            <MainRoutes/> {/*main website routes*/}
-            <ProtectedRoutes/> {/*protected routes*/}
+            <Routes>
+                {MainRoutes()} {/*main website routes*/}
+                {ProtectedRoutes()} {/*protected routes*/}
+            </Routes>
         </BrowserRouter>
     )
 }

@@ -1,29 +1,31 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import userSelector from "../../App/Redux/User/Selectors/userSelector";
 import {userLogin} from "../../App/Redux/User/Slices/userSlice";
 import {useDispatch} from "react-redux";
 import logo from "../../Resources/Images/svg/logo.svg";
 import {useNavigate} from 'react-router-dom';
-import {increment} from "../../App/Redux/Counter/Slices/counterSlice";
 
 const Login = () => {
 
-    const [form , register] = useState({});
+    const [form, register] = useState({});
     const dispatch = useDispatch();
-    const user = userSelector();
     const navigate = useNavigate();
+    const user = userSelector();
 
-    const onSubmit = (e) => {
+    useEffect(() => {
+        user.isLoggedIn && navigate('/home');
+    }, [user.isLoggedIn]);
+
+    const onSubmit = async (e) => {
         e.preventDefault();
         dispatch(userLogin(form));
-        user.isLoggedIn && navigate('/home');
-        register({});
+        // register({}); to clear all the form inputs
     }
 
-    return(
+    return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+                <img src={logo} className="App-logo" alt="logo"/>
                 <p>Hello Vite + React!</p>
 
                 <form autoComplete="off" onSubmit={onSubmit}>
@@ -31,7 +33,7 @@ const Login = () => {
                            value={form.email ?? ''}
                            placeholder='email'
                            onChange={(e) => register(
-                               {...form, email : e.target.value })
+                               {...form, email: e.target.value})
                            }
                     />
                     <input
@@ -39,7 +41,7 @@ const Login = () => {
                         value={form.password ?? ''}
                         placeholder='password'
                         onChange={(e) => register(
-                            {...form, password : e.target.value })
+                            {...form, password: e.target.value})
                         }
                     />
 
