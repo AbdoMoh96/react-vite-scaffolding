@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import axios from "../../../Api/customersApi/example";
+import axios from "../../../Api/mainurl";
 import Cookie from "js-cookie";
 
 
